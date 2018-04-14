@@ -20,7 +20,7 @@ var rule = require("../../../lib/rules/no-lodash-isundefined"),
 var ruleTester = new RuleTester();
 
 const errors = [{
-    messageId: 'invalid',
+    message : "Use native JavaScript to check for undefined",
     type: "MemberExpression"
 }];
 
