@@ -45,4 +45,14 @@ Then configure the rules you want to use under the rules section.
 
 `no-lodash-isundefined` : Prevents usage of `_.isUndefined` method
 
-`no-lodash-isnull` : Prevents usage of `_.isNull` method
+`no-lodash-isnull` : Prevents usage of `_.isNull` method. This rule supports autofixing the code.
+
+Example:
+```
+ const test = _.isNull(myVar);
+```
+
+Will be auto-fixed to
+```
+const test = myVar === null;
+```
