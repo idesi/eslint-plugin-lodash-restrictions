@@ -38,20 +38,6 @@ ruleTester.run("no-lodash-isnull", rule, {
   ],
 
     invalid: [
-      /**
-       * Make this work
-       * const testVar = false;
-const test = testVar === _.isNull(5)
-const test2 = testVar === 5 === null
-
-console.log('1', test);
-console.log('2', test2);
-{
-    code: "test = testVar === _.isNull(5)",
-    errors,
-    code: "test = testVar === 5 === null",
-},
-       */
       //Simple tests with multiple data types
       {
           code: "test = _.isNull(5)",
@@ -184,6 +170,27 @@ console.log('2', test2);
         code: "test = function(){ if(_.isNull([])) { return 1 } }",
         errors,
         output : "test = function(){ if([] === null) { return 1 } }",
+      },
+      // Mixing in logical & binay expressions
+      {
+          code: "test = testVar === _.isNull(5)",
+          errors,
+          output: "test = testVar === (5 === null)",
+      },
+      {
+          code: "test = _.isNull(5) === testVar",
+          errors,
+          output: "test = (5 === null) === testVar",
+      },
+      {
+        code : "test4 = _.isNull(5) && 8 ? true : false;",
+        errors,
+        output : "test4 = (5 === null) && 8 ? true : false;"
+      },
+      {
+        code : "test4 = 8 && _.isNull(5) ? true : false;",
+        errors,
+        output : "test4 = 8 && (5 === null) ? true : false;"
       },
     ]
 });
