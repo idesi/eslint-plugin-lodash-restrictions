@@ -171,11 +171,16 @@ ruleTester.run("no-lodash-isnull", rule, {
         errors,
         output : "test = function(){ if([] === null) { return 1 } }",
       },
-      // Mixing in logical & binay expressions
+      // Mixing in logical & binary expressions
       {
           code: "test = testVar === _.isNull(5)",
           errors,
           output: "test = testVar === (5 === null)",
+      },
+      {
+          code: "test = testVar === _.isNull(testVar2)",
+          errors,
+          output: "test = testVar === (testVar2 === null)",
       },
       {
           code: "test = _.isNull(5) === testVar",
